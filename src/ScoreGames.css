@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+.score {
+  margin: 50px auto;
+  width: 462px;
+  height: 112px;
+
+  font-family: Righteous;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 96px;
+  line-height: 130%;
+  /* or 125px */
+
+
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  color: #ffffff;
+  /* background-color: blueviolet; */
+  text-align: center;
+}
+
+.player1{
+  color: #ff5454;
+}
+
+.player2{
+  color: #5BCEFF;
+}
