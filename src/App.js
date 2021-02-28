@@ -21,7 +21,17 @@ class App extends React.Component {
 
   render(){
     return(
-      <div>game</div>
+      <div className = "gameDesk">
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+        <div className = "gameDesk-grid">1</div>
+      </div>
     )
   }
 }
