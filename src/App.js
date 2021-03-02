@@ -1,5 +1,6 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
+import Button from '@material-ui/core/Button';
 import './App.css';
 // import './PlayerMarker'
 import PlayerMarker from './PlayerMarker';
@@ -16,7 +17,7 @@ class App extends React.Component {
       score: [0, 0],
       testState: "zero"
     };
-    
+
   }
 
   ClickGrid = event => {
@@ -45,15 +46,15 @@ class App extends React.Component {
       console.log(`не верный ход`)
       //<PlayerMarker name={this.state.player} />
     }
-    
-    
+
+
   }
-  
+
   scoreUp(player) {
     if (player) { this.state.score[0] += 1 }
     else { this.state.score[1] += 1 }
   }
-  
+
   resetGame() {
     console.log("reset")
     this.soundInGame("reset");
@@ -66,14 +67,14 @@ class App extends React.Component {
     })
   }
 
-  soundInGame(action="reset") {
+  soundInGame(action = "reset") {
     const sounds = {
-      reset:"https://www.fesliyanstudios.com/play-mp3/5254",
-      clickSq:"https://www.fesliyanstudios.com/play-mp3/2903"
+      reset: "https://www.fesliyanstudios.com/play-mp3/5254",
+      clickSq: "https://www.fesliyanstudios.com/play-mp3/2903"
       //https://www.fesliyanstudios.com/royalty-free-sound-effects-download/spells-and-power-ups-217
     }
     const audio = new Audio(sounds[action]);
-      audio.play();
+    audio.play();
   }
 
 
@@ -91,8 +92,8 @@ class App extends React.Component {
           <div className="gameDesk-grid" onClick={this.ClickGrid} data="6">{this.state.playerMarkerDisplay[6]}</div>
           <div className="gameDesk-grid" onClick={this.ClickGrid} data="7">{this.state.playerMarkerDisplay[7]}</div>
           <div className="gameDesk-grid" onClick={this.ClickGrid} data="8">{this.state.playerMarkerDisplay[8]}</div>
-
         </div>
+        <div><Button variant="contained" color="primary">New Game</Button></div>        
       </div>
     )
   }
