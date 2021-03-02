@@ -17,15 +17,21 @@ class App extends React.Component {
       player: true,
       score: [0, 0],
       testState: "zero",
+      lineWin: 0
     };
 
     this.playerMark = 0;
     this.isGameEnd = false;
-    this.lineWin = 0;
+    this.strokeCounter = 0;
+
+    this.delay = require('delay');
   }
 
   ClickGrid = (event) => {
     if (!this.isGameEnd) {
+
+      this.strokeCounter += 1
+
       this.soundInGame("clickSq");
       console.log("grid");
       let data = event.target.getAttribute("data");
@@ -47,12 +53,16 @@ class App extends React.Component {
         );
 
       } else {
-        this.resetGame();
+        
         console.log(`не верный ход`);
         //<PlayerMarker name={this.state.player} />
       }
 
       this.isFinishGame(this.playerMark);
+
+
+      //! test
+
     }
   };
 
@@ -70,13 +80,34 @@ class App extends React.Component {
 
     if (sq[0] === playerMark & sq[4] === playerMark & sq[8] === playerMark) { this.isWin(playerMark, 7) }
     if (sq[6] === playerMark & sq[4] === playerMark & sq[2] === playerMark) { this.isWin(playerMark, 8) }
+
+    if (this.strokeCounter === 9 & !this.isGameEnd) { this.isTie(0) }
+
+
+  }
+
+  isTie(playerMark, lineWin) {
+    (async () => {
+      console.log('5555')
+      await this.delay(1000);      // Executed 100 milliseconds later
+      console.log('7777')
+      this.resetGame()
+
+    })();
   }
 
   isWin(playerMark, lineWin) {
-    this.lineWin = lineWin;
+    this.state.lineWin = lineWin;
     this.scoreUp(this.state.player);
     this.isGameEnd = true;
     console.log("Win:" + playerMark);
+    (async () => {
+      console.log('5555')
+      await this.delay(2000);      // Executed 100 milliseconds later
+      console.log('7777')
+      this.resetGame()
+
+    })();
   }
 
   scoreUp(player) {
@@ -94,10 +125,20 @@ class App extends React.Component {
       squares: Array(9).fill(null),
       playerMarkerDisplay: Array(9).fill(null),
       player: true,
-      score: [0, 0],
-
-      testState: "zero",
+      lineWin: 0
     });
+
+    this.playerMark = 0;
+    this.isGameEnd = false;
+    this.state.lineWin = 0;
+    this.strokeCounter = 0;
+  }
+
+  newGame = () => {
+    console.log("reset");
+    this.resetGame();
+    this.setState({ score: [0, 0] });
+
   }
 
   soundInGame(action = "reset") {
@@ -118,7 +159,7 @@ class App extends React.Component {
         </div>
         <div className="gameDesk">
           <div>
-            <Line  lineWin={this.lineWin}/>
+            <Line lineWin={this.state.lineWin} />
           </div>
           <div className="gameDesk-grid" onClick={this.ClickGrid} data="0">
             {this.state.playerMarkerDisplay[0]}
@@ -149,7 +190,7 @@ class App extends React.Component {
           </div>
         </div>
         <div>
-          <Button variant="contained" onClick={this.ClickGrid} color="primary">
+          <Button variant="contained" onClick={this.newGame} color="primary">
             New Game
           </Button>
         </div>

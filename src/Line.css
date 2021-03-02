@@ -24,17 +24,14 @@
 
 .blink5 {
   -webkit-animation: blink5 2s linear infinite;
-  animation: blink5 2s linear infinite;
+  animation: blink5 0.6s linear infinite;
 
-  opacity: 0.5;
 }
 @-webkit-keyframes blink5 {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0% { opacity: 0.8; }
   100% { opacity: 0; }
 }
 @keyframes blink5 {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0% { opacity: 0.8; }
   100% { opacity: 0; }
 }
