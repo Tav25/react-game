@@ -15,10 +15,12 @@ class App extends React.Component {
       player: true,
       score: [0, 0],
       testState: "zero"
-    }
+    };
+    
   }
 
   ClickGrid = event => {
+    this.soundInGame("clickSq");
     console.log("grid")
     let data = event.target.getAttribute("data")
     let squareArray = this.state.squares
@@ -54,19 +56,24 @@ class App extends React.Component {
   
   resetGame() {
     console.log("reset")
-    // this.soundInGame();
-    // this.setState({
-    //   squares: Array(9).fill(null),
-    //   playerMarkerDisplay: Array(9).fill(null),
-    //   player: true,
-    //   score: [0, 0],
-    //   testState: "zero"
-    // })
+    this.soundInGame("reset");
+    this.setState({
+      squares: Array(9).fill(null),
+      playerMarkerDisplay: Array(9).fill(null),
+      player: true,
+      score: [0, 0],
+      testState: "zero"
+    })
   }
 
-  soundInGame() {
-    let audio = new Audio('./sound/locator.wav');
-    audio.play();
+  soundInGame(action="reset") {
+    const sounds = {
+      reset:"https://www.fesliyanstudios.com/play-mp3/5254",
+      clickSq:"https://www.fesliyanstudios.com/play-mp3/2903"
+      //https://www.fesliyanstudios.com/royalty-free-sound-effects-download/spells-and-power-ups-217
+    }
+    const audio = new Audio(sounds[action]);
+      audio.play();
   }
 
 
