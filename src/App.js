@@ -5,6 +5,7 @@ import "./App.css";
 // import './PlayerMarker'
 import PlayerMarker from "./PlayerMarker";
 import ScoreGames from "./ScoreGames";
+import Line from "./Line";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,57 +21,59 @@ class App extends React.Component {
 
     this.playerMark = 0;
     this.isGameEnd = false;
+    this.lineWin = 0;
   }
 
   ClickGrid = (event) => {
-    if (!this.isGameEnd){
-    this.soundInGame("clickSq");
-    console.log("grid");
-    let data = event.target.getAttribute("data");
-    let squareArray = this.state.squares;
-    if (this.state.squares[data] === null) {
-      if (this.state.player) {
-        this.playerMark = 1;
-        this.setState({ player: false });
+    if (!this.isGameEnd) {
+      this.soundInGame("clickSq");
+      console.log("grid");
+      let data = event.target.getAttribute("data");
+      let squareArray = this.state.squares;
+      if (this.state.squares[data] === null) {
+        if (this.state.player) {
+          this.playerMark = 1;
+          this.setState({ player: false });
+        } else {
+          this.playerMark = 0;
+          this.setState({ player: true });
+        }
+
+        squareArray[data] = this.playerMark;
+        this.setState({ squares: squareArray });
+        console.log(data, this.state.squares, this.state.playerMarkerDisplay);
+        this.state.playerMarkerDisplay[data] = (
+          <PlayerMarker name={this.state.player} />
+        );
+
       } else {
-        this.playerMark = 0;
-        this.setState({ player: true });
+        this.resetGame();
+        console.log(`не верный ход`);
+        //<PlayerMarker name={this.state.player} />
       }
 
-      squareArray[data] = this.playerMark;
-      this.setState({ squares: squareArray });
-      console.log(data, this.state.squares, this.state.playerMarkerDisplay);
-      this.state.playerMarkerDisplay[data] = (
-        <PlayerMarker name={this.state.player} />
-      );
-      
-    } else {
-      this.resetGame();
-      console.log(`не верный ход`);
-      //<PlayerMarker name={this.state.player} />
+      this.isFinishGame(this.playerMark);
     }
-
-    this.isFinishGame(this.playerMark);
-  }
   };
 
   isFinishGame(playerMark) {
     console.log("isFinGame" + this.state.squares);
     const sq = this.state.squares
 
-    if( sq[0] === playerMark & sq[1] === playerMark & sq[2] === playerMark){this.isWin(playerMark)}
-    if( sq[3] === playerMark & sq[4] === playerMark & sq[5] === playerMark){this.isWin(playerMark)}
-    if( sq[6] === playerMark & sq[7] === playerMark & sq[8] === playerMark){this.isWin(playerMark)}
+    if (sq[0] === playerMark & sq[1] === playerMark & sq[2] === playerMark) { this.isWin(playerMark, 1) }
+    if (sq[3] === playerMark & sq[4] === playerMark & sq[5] === playerMark) { this.isWin(playerMark, 2) }
+    if (sq[6] === playerMark & sq[7] === playerMark & sq[8] === playerMark) { this.isWin(playerMark, 3) }
 
-    if( sq[0] === playerMark & sq[3] === playerMark & sq[6] === playerMark){this.isWin(playerMark)}
-    if( sq[1] === playerMark & sq[4] === playerMark & sq[7] === playerMark){this.isWin(playerMark)}
-    if( sq[2] === playerMark & sq[5] === playerMark & sq[8] === playerMark){this.isWin(playerMark)}    
-    
-    if( sq[0] === playerMark & sq[4] === playerMark & sq[8] === playerMark){this.isWin(playerMark)}
-    if( sq[6] === playerMark & sq[4] === playerMark & sq[2] === playerMark){this.isWin(playerMark)}
+    if (sq[0] === playerMark & sq[3] === playerMark & sq[6] === playerMark) { this.isWin(playerMark, 4) }
+    if (sq[1] === playerMark & sq[4] === playerMark & sq[7] === playerMark) { this.isWin(playerMark, 5) }
+    if (sq[2] === playerMark & sq[5] === playerMark & sq[8] === playerMark) { this.isWin(playerMark, 6) }
+
+    if (sq[0] === playerMark & sq[4] === playerMark & sq[8] === playerMark) { this.isWin(playerMark, 7) }
+    if (sq[6] === playerMark & sq[4] === playerMark & sq[2] === playerMark) { this.isWin(playerMark, 8) }
   }
 
-  isWin(playerMark){
+  isWin(playerMark, lineWin) {
+    this.lineWin = lineWin;
     this.scoreUp(this.state.player);
     this.isGameEnd = true;
     console.log("Win:" + playerMark);
@@ -114,6 +117,9 @@ class App extends React.Component {
           <ScoreGames score={this.state.score} />
         </div>
         <div className="gameDesk">
+          <div>
+            <Line  lineWin={this.lineWin}/>
+          </div>
           <div className="gameDesk-grid" onClick={this.ClickGrid} data="0">
             {this.state.playerMarkerDisplay[0]}
           </div>

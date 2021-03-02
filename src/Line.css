@@ -1,0 +1,40 @@
+.line18 {
+  position: relative;
+  width: 450px;
+  height: 0px;
+  top: 70px;
+  left: 70px;
+
+  /* border: 20px solid #FF0000; */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* transform: rotate(45deg); */
+}
+
+
+.lineGoriz {
+  position: relative;
+  width: 342px;
+  height: 0px;
+  top: 70px;
+  left: 70px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* transform: rotate(-90deg); */
+}
+
+
+.blink5 {
+  -webkit-animation: blink5 2s linear infinite;
+  animation: blink5 2s linear infinite;
+
+  opacity: 0.5;
+}
+@-webkit-keyframes blink5 {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes blink5 {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
