@@ -43,7 +43,7 @@ class App extends React.Component {
       score: [0, 0],
       testState: "zero",
       lineWin: 0,
-      soundLevel: 0.5,
+      soundLevel: 0.8,
       isLoopPlaySound: false,
       soundOn: true,
       isShowMessage: false,
@@ -64,15 +64,14 @@ class App extends React.Component {
   }
 
   ClickGrid = (event) => {
-    this.soundInGame(tapSound);
     console.log("grid");
     let data = event.target.getAttribute("data");
-    this.mainGame(data, false)
+    this.mainGame(data)
 
   }
 
   ClickNum = (key) => {
-    this.soundInGame(tapSound);
+    
     this.setState({ numKey: key });
     let data = this.state.numKey;
     if( key>=1 ){
@@ -88,17 +87,18 @@ class App extends React.Component {
         2:7,
         3:8
       }
-      this.mainGame(numericalCorrection[key], true)
+      this.mainGame(numericalCorrection[key])
       this.forceUpdate()
     }
 
   }
 
 
-  mainGame(data, g) {
+  mainGame(data) {
 
 
     if (!this.isGameEnd) {
+      this.soundInGame(tapSound);
       let squareArray = this.state.squares;
       if (this.state.squares[data] === null) {
         this.strokeCounter += 1
@@ -116,6 +116,8 @@ class App extends React.Component {
         this.state.playerMarkerDisplay[data] = (
           <PlayerMarker name={this.playerMark} />
         );
+
+        this.forceUpdate()
 
       } else {
 
@@ -219,6 +221,46 @@ class App extends React.Component {
     console.log("reset");
     this.resetGame();
     this.setState({ score: [0, 0] });
+
+  }
+
+
+  automatic = () => {
+    console.log("reset");
+    this.newGame();
+    const arrayAuto = [0,1,2,3,4,5,7,6,8];
+
+    const spead = 200;
+    (async () => {
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[0])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[1])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[2])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[3])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[4])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[5])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[6])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[7])
+      await this.forceUpdate()
+      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.mainGame(arrayAuto[8])
+      await this.forceUpdate()
+    })();
 
   }
 
@@ -356,6 +398,10 @@ class App extends React.Component {
         <div className="settings">
           <Button variant="outlined" onClick={this.newGame} color="primary" className="newGameClass">
             New Game
+          </Button>
+
+          <Button variant="outlined" onClick={this. automatic} color="primary" className="newGameClass" style={{ marginTop: 5 }}>
+            Auto play
           </Button>
 
 
