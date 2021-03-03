@@ -58,13 +58,13 @@ class App extends React.Component {
   ClickGrid = (event) => {
     if (!this.isGameEnd) {
 
-      this.strokeCounter += 1
-
+      
       this.soundInGame(tapSound);
       console.log("grid");
       let data = event.target.getAttribute("data");
       let squareArray = this.state.squares;
       if (this.state.squares[data] === null) {
+        this.strokeCounter += 1
         if (this.state.player) {
           this.playerMark = 1;
           this.setState({ player: false });
