@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0152ef65.chunk.css",
+    "main.js": "/static/js/main.3d934eb1.chunk.js",
+    "main.js.map": "/static/js/main.3d934eb1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e224cf4a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e224cf4a.js.map",
+    "static/js/2.2b74737a.chunk.js": "/static/js/2.2b74737a.chunk.js",
+    "static/js/2.2b74737a.chunk.js.map": "/static/js/2.2b74737a.chunk.js.map",
+    "static/js/3.36f8f1a1.chunk.js": "/static/js/3.36f8f1a1.chunk.js",
+    "static/js/3.36f8f1a1.chunk.js.map": "/static/js/3.36f8f1a1.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.0152ef65.chunk.css.map": "/static/css/main.0152ef65.chunk.css.map",
+    "static/js/2.2b74737a.chunk.js.LICENSE.txt": "/static/js/2.2b74737a.chunk.js.LICENSE.txt",
+    "static/media/Melody 02.76d50769.wav": "/static/media/Melody 02.76d50769.wav",
+    "static/media/alert_error-03.d4fbb6f3.wav": "/static/media/alert_error-03.d4fbb6f3.wav",
+    "static/media/hero_decorative-celebration-01.fd000b5b.wav": "/static/media/hero_decorative-celebration-01.fd000b5b.wav",
+    "static/media/hero_decorative-celebration-02.ef5d0138.wav": "/static/media/hero_decorative-celebration-02.ef5d0138.wav",
+    "static/media/navigation_hover-tap.23505dfc.wav": "/static/media/navigation_hover-tap.23505dfc.wav",
+    "static/media/notification_decorative-01.ffcd70c6.wav": "/static/media/notification_decorative-01.ffcd70c6.wav"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e224cf4a.js",
+    "static/js/2.2b74737a.chunk.js",
+    "static/css/main.0152ef65.chunk.css",
+    "static/js/main.3d934eb1.chunk.js"
+  ]
+}
