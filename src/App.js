@@ -1,11 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Button from "@material-ui/core/Button";
 import "./App.css";
 // import './PlayerMarker'
 import PlayerMarker from "./PlayerMarker";
 import ScoreGames from "./ScoreGames";
 import Line from "./Line";
+
+import Button from "@material-ui/core/Button";
+import Slider from '@material-ui/core/Slider';
+//
+import tapSound from './sound/navigation_hover-tap.wav';
+import resetSound from './sound/notification_decorative-01.wav';
+import celebrationSound from './sound/hero_decorative-celebration-02.wav';
+import tieSound from './sound/hero_decorative-celebration-01.wav';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +25,8 @@ class App extends React.Component {
       player: true,
       score: [0, 0],
       testState: "zero",
-      lineWin: 0
+      lineWin: 0,
+      soundLevel: 0.5
     };
 
     this.playerMark = 0;
@@ -32,7 +41,7 @@ class App extends React.Component {
 
       this.strokeCounter += 1
 
-      this.soundInGame("clickSq");
+      this.soundInGame(tapSound);
       console.log("grid");
       let data = event.target.getAttribute("data");
       let squareArray = this.state.squares;
@@ -87,9 +96,10 @@ class App extends React.Component {
   }
 
   isTie(playerMark, lineWin) {
+    this.soundInGame(tieSound);
     (async () => {
       console.log('5555')
-      await this.delay(1000);      // Executed 100 milliseconds later
+      await this.delay(2000);      // Executed 100 milliseconds later
       console.log('7777')
       this.resetGame()
 
@@ -97,6 +107,7 @@ class App extends React.Component {
   }
 
   isWin(playerMark, lineWin) {
+    this.soundInGame(celebrationSound);
     this.state.lineWin = lineWin;
     this.scoreUp(this.state.player);
     this.isGameEnd = true;
@@ -120,7 +131,7 @@ class App extends React.Component {
 
   resetGame() {
     console.log("reset");
-    this.soundInGame("reset");
+    this.soundInGame(resetSound);
     this.setState({
       squares: Array(9).fill(null),
       playerMarkerDisplay: Array(9).fill(null),
@@ -141,15 +152,17 @@ class App extends React.Component {
 
   }
 
-  soundInGame(action = "reset") {
-    const sounds = {
-      reset: "https://www.fesliyanstudios.com/play-mp3/5254",
-      clickSq: "https://www.fesliyanstudios.com/play-mp3/2903",
-      //https://www.fesliyanstudios.com/royalty-free-sound-effects-download/spells-and-power-ups-217
-    };
-    const audio = new Audio(sounds[action]);
+  soundInGame = (sound) => {
+    const audio = new Audio(sound);
+    console.log(this.state.soundLevel)
+    audio.volume= this.state.soundLevel * 1 ;
     audio.play();
   }
+
+  handleChange = (event, newValue) => {
+    this.setState({ soundLevel:newValue});
+    // console.log(newValue);
+  };
 
   render() {
     return (
@@ -193,6 +206,8 @@ class App extends React.Component {
           <Button variant="contained" onClick={this.newGame} color="primary">
             New Game
           </Button>
+          <Slider value={this.state.soundLevel} onChange={this.handleChange} min={0}
+        max={1} step={0.05} aria-labelledby="continuous-slider" />
         </div>
       </div>
     );
