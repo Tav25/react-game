@@ -8,11 +8,22 @@ import Line from "./Line";
 
 import Button from "@material-ui/core/Button";
 import Slider from '@material-ui/core/Slider';
+import VolumeUp from '@material-ui/icons/VolumeUp';
+import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
+import StopRoundedIcon from '@material-ui/icons/StopRounded';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 //
 import tapSound from './sound/navigation_hover-tap.wav';
 import resetSound from './sound/notification_decorative-01.wav';
 import celebrationSound from './sound/hero_decorative-celebration-02.wav';
 import tieSound from './sound/hero_decorative-celebration-01.wav';
+import loopSound from './sound/Melody 02.wav';
+//
+import { Howl, Howler } from 'howler';
+import { VolumeDown } from "@material-ui/icons";
+
+
 
 
 class App extends React.Component {
@@ -26,7 +37,9 @@ class App extends React.Component {
       score: [0, 0],
       testState: "zero",
       lineWin: 0,
-      soundLevel: 0.5
+      soundLevel: 0.5,
+      isLoopPlaySound: false,
+      soundOn: true,
     };
 
     this.playerMark = 0;
@@ -34,6 +47,12 @@ class App extends React.Component {
     this.strokeCounter = 0;
 
     this.delay = require('delay');
+
+    this.buttonMusic = {
+      buttonText: "play music",
+      buttonIcon: (<PlayArrowRoundedIcon />)
+    };
+
   }
 
   ClickGrid = (event) => {
@@ -62,7 +81,7 @@ class App extends React.Component {
         );
 
       } else {
-        
+
         console.log(`не верный ход`);
         //<PlayerMarker name={this.state.player} />
       }
@@ -152,17 +171,80 @@ class App extends React.Component {
 
   }
 
-  soundInGame = (sound) => {
-    const audio = new Audio(sound);
-    console.log(this.state.soundLevel)
-    audio.volume= this.state.soundLevel * 1 ;
+  soundInGame = (sound, loopS = false) => {
+    const audio = new Howl({
+      src: [sound],
+      loop: loopS,
+      volume: this.state.soundLevel,
+    });
     audio.play();
   }
 
+
+  soundLoopGame = () => {
+    let id1;
+    const audio02 = new Howl({
+      src: [loopSound],
+      loop: true,
+      volume: this.state.soundLevel,
+    });
+    if (!this.state.isLoopPlaySound) {
+      id1 = audio02.play();
+
+      this.setState({ isLoopPlaySound: true })
+      this.buttonMusic = {
+        buttonText: "stop music",
+        buttonIcon: (<StopRoundedIcon />)
+      };
+    } else {
+      this.setState({ isLoopPlaySound: false })
+      Howler.stop();
+      this.buttonMusic = {
+        buttonText: "play music",
+        buttonIcon: (<PlayArrowRoundedIcon />)
+      };
+    }
+  }
+
+  playSound(audio) {
+    //check if sound is null, if not stop previous sound and unload it
+    ;
+  }
+
   handleChange = (event, newValue) => {
-    this.setState({ soundLevel:newValue});
-    // console.log(newValue);
+    Howler.volume(this.state.soundLevel);
+    this.setState({ soundLevel: newValue });
+    if (this.state.soundLevel > 0) {
+      this.setState({ soundOn: true });
+    }
+    if (this.state.soundLevel === 0) {
+      this.setState({ soundOn: false });
+
+      if (this.state.isLoopPlaySound) {
+        this.soundLoopGame()
+      }
+    }
+
   };
+
+  soundOnChecked = () => {
+    if (this.state.soundOn) {
+      this.setState({
+        soundOn: false,
+        soundLevel: 0
+      });
+      if (this.state.isLoopPlaySound) {
+        this.soundLoopGame()
+      }
+
+    }
+    else {
+      this.setState({
+        soundOn: true,
+        soundLevel: 0.5
+      });
+    }
+  }
 
   render() {
     return (
@@ -202,13 +284,39 @@ class App extends React.Component {
             {this.state.playerMarkerDisplay[8]}
           </div>
         </div>
-        <div>
-          <Button variant="contained" onClick={this.newGame} color="primary">
+
+        <div className="settings">
+          <Button variant="outlined" onClick={this.newGame} color="primary" className="newGameClass">
             New Game
           </Button>
-          <Slider value={this.state.soundLevel} onChange={this.handleChange} min={0}
-        max={1} step={0.05} aria-labelledby="continuous-slider" />
+
+
+          <div>
+            <div className="soundSettings">
+              <Button
+                variant="outlined"
+                color="secondary"
+                // size="large"
+                // className={classes.button}
+                startIcon={this.buttonMusic.buttonIcon}
+                onClick={this.soundLoopGame}
+              >{this.buttonMusic.buttonText}</Button>
+
+
+              <VolumeUp color="secondary" />
+              <Slider style={{ width: 125 }} value={this.state.soundLevel} onChange={this.handleChange} min={0}
+                max={1} step={0.05} aria-labelledby="continuous-slider" color="secondary" />
+              <VolumeDown color="secondary" />
+
+              <FormControlLabel
+                control={<Switch checked={this.state.soundOn} onChange={this.soundOnChecked} />}
+                label="sound"
+              />
+            </div>
+
+          </div>
         </div>
+
       </div>
     );
   }
