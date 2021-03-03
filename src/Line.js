@@ -1,9 +1,9 @@
 import React from 'react';
 import './Line.css';
-import line18 from './Line18.png';
-import line63 from './Line63.png';
-import lineGoriz from './LineGoriz.png';
-import lineVertical from './LineVertical.png';
+import line18 from './images/Line18.png';
+import line63 from './images/Line63.png';
+import lineGoriz from './images/LineGoriz.png';
+import lineVertical from './images/LineVertical.png';
 // import playerMarker2 from './playerMarker2.png';
 
 function Line(props) {

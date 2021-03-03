@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./App.css";
-// import './PlayerMarker'
 import PlayerMarker from "./PlayerMarker";
 import ScoreGames from "./ScoreGames";
 import Line from "./Line";
@@ -15,17 +14,15 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Snackbar from '@material-ui/core/Snackbar';
 
-//
 import tapSound from './sound/navigation_hover-tap.wav';
 import resetSound from './sound/notification_decorative-01.wav';
 import celebrationSound from './sound/hero_decorative-celebration-02.wav';
 import tieSound from './sound/hero_decorative-celebration-01.wav';
 import loopSound from './sound/Melody 02.wav';
 import errorSound from './sound/alert_error-03.wav';
-//
+
 import { Howl, Howler } from 'howler';
 import { VolumeDown } from "@material-ui/icons";
-
 
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 
@@ -95,8 +92,6 @@ class App extends React.Component {
 
 
   mainGame(data) {
-
-
     if (!this.isGameEnd) {
       this.soundInGame(tapSound);
       let squareArray = this.state.squares;
@@ -127,19 +122,12 @@ class App extends React.Component {
           this.setState({ isShowMessage: true });
           await this.delay(1000);
           this.setState({ isShowMessage: false });
-          // Executed 100 milliseconds later
 
         })();
 
 
-        //<PlayerMarker name={this.state.player} />
       }
-
       this.isFinishGame(this.playerMark);
-
-
-      //! test
-
     }
 
 
@@ -171,7 +159,7 @@ class App extends React.Component {
     this.soundInGame(tieSound);
     (async () => {
       console.log('5555')
-      await this.delay(2000);      // Executed 100 milliseconds later
+      await this.delay(2000);      
       console.log('7777')
       this.resetGame()
 
@@ -186,7 +174,7 @@ class App extends React.Component {
     console.log("Win:" + playerMark);
     (async () => {
       console.log('5555')
-      await this.delay(2000);      // Executed 100 milliseconds later
+      await this.delay(2000);      
       console.log('7777')
       this.resetGame()
 
@@ -233,31 +221,31 @@ class App extends React.Component {
     const spead = 200;
     (async () => {
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[0])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[1])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[2])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[3])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[4])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[5])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[6])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[7])
       await this.forceUpdate()
-      await this.delay(spead);      // Executed 100 milliseconds later
+      await this.delay(spead);      
       await this.mainGame(arrayAuto[8])
       await this.forceUpdate()
     })();
@@ -299,10 +287,7 @@ class App extends React.Component {
     }
   }
 
-  playSound(audio) {
-    //check if sound is null, if not stop previous sound and unload it
-    ;
-  }
+
 
   handleChange = (event, newValue) => {
     Howler.volume(this.state.soundLevel);
