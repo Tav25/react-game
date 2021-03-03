@@ -7,14 +7,14 @@ function PlayerMarker(props) {
   if (props.name === 1) {
 
     return (
-      <div className="PlayerMarker">
+      <div className="PlayerMarker blink6">
         <img src={playerMarker1} className="App-logo" alt="logo" />
       </div>
     );
   }
   else {
     return (
-      <div className="PlayerMarker">
+      <div className="PlayerMarker blink6">
         <img src={playerMarker2} className="App-logo" alt="logo" />
       </div>
     );
