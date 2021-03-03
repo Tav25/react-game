@@ -13,12 +13,15 @@ import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Snackbar from '@material-ui/core/Snackbar';
+
 //
 import tapSound from './sound/navigation_hover-tap.wav';
 import resetSound from './sound/notification_decorative-01.wav';
 import celebrationSound from './sound/hero_decorative-celebration-02.wav';
 import tieSound from './sound/hero_decorative-celebration-01.wav';
 import loopSound from './sound/Melody 02.wav';
+import errorSound from './sound/alert_error-03.wav';
 //
 import { Howl, Howler } from 'howler';
 import { VolumeDown } from "@material-ui/icons";
@@ -40,6 +43,7 @@ class App extends React.Component {
       soundLevel: 0.5,
       isLoopPlaySound: false,
       soundOn: true,
+      isShowMessage: false,
     };
 
     this.playerMark = 0;
@@ -58,7 +62,7 @@ class App extends React.Component {
   ClickGrid = (event) => {
     if (!this.isGameEnd) {
 
-      
+
       this.soundInGame(tapSound);
       console.log("grid");
       let data = event.target.getAttribute("data");
@@ -83,6 +87,16 @@ class App extends React.Component {
       } else {
 
         console.log(`не верный ход`);
+        this.soundInGame(errorSound);
+        (async () => {
+          this.setState({ isShowMessage: true });
+          await this.delay(1000);
+          this.setState({ isShowMessage: false });
+          // Executed 100 milliseconds later
+
+        })();
+
+
         //<PlayerMarker name={this.state.player} />
       }
 
@@ -284,6 +298,14 @@ class App extends React.Component {
             {this.state.playerMarkerDisplay[8]}
           </div>
         </div>
+        
+        <div><Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={this.state.isShowMessage}
+          message="Wrong move. This cell is occupied."
+
+        /></div>
+
 
         <div className="settings">
           <Button variant="outlined" onClick={this.newGame} color="primary" className="newGameClass">
