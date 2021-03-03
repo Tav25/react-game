@@ -4,10 +4,8 @@ import line18 from './images/Line18.png';
 import line63 from './images/Line63.png';
 import lineGoriz from './images/LineGoriz.png';
 import lineVertical from './images/LineVertical.png';
-// import playerMarker2 from './playerMarker2.png';
 
 function Line(props) {
-  console.log(props.lineWin)
 
 
   const line = {
@@ -59,22 +57,7 @@ function Line(props) {
     line[props.lineWin]
   )
 
-  // return (
-  //   <div>
-  //     <div className="line18 blink5">
-  //       <img src={line18} className="App-logo" alt="logo" />
-  //     </div>
-  //     <div className="line18 blink5">
-  //       <img src={line63} className="App-logo" alt="logo" />
-  //     </div>
-  //     <div className="lineGoriz blink5">
-  //       <img src={lineGoriz} className="App-logo" alt="logo" />
-  //     </div>
-  //     <div className="lineGoriz blink5" style={{ top: 225 }}>
-  //       <img src={lineVertical} className="App-logo" alt="logo" />
-  //     </div>
-  //   </div>
-  // );
+
 }
 
 
