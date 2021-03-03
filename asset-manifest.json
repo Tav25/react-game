@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/react-game/static/css/main.5d5e256c.chunk.css",
-    "main.js": "/react-game/static/js/main.3d934eb1.chunk.js",
-    "main.js.map": "/react-game/static/js/main.3d934eb1.chunk.js.map",
-    "runtime-main.js": "/react-game/static/js/runtime-main.0332359a.js",
-    "runtime-main.js.map": "/react-game/static/js/runtime-main.0332359a.js.map",
-    "static/js/2.2b74737a.chunk.js": "/react-game/static/js/2.2b74737a.chunk.js",
-    "static/js/2.2b74737a.chunk.js.map": "/react-game/static/js/2.2b74737a.chunk.js.map",
-    "static/js/3.36f8f1a1.chunk.js": "/react-game/static/js/3.36f8f1a1.chunk.js",
-    "static/js/3.36f8f1a1.chunk.js.map": "/react-game/static/js/3.36f8f1a1.chunk.js.map",
+    "main.css": "/react-game/static/css/main.7c7b8d41.chunk.css",
+    "main.js": "/react-game/static/js/main.e7489633.chunk.js",
+    "main.js.map": "/react-game/static/js/main.e7489633.chunk.js.map",
+    "runtime-main.js": "/react-game/static/js/runtime-main.a9ff8bd0.js",
+    "runtime-main.js.map": "/react-game/static/js/runtime-main.a9ff8bd0.js.map",
+    "static/js/2.1e48a972.chunk.js": "/react-game/static/js/2.1e48a972.chunk.js",
+    "static/js/2.1e48a972.chunk.js.map": "/react-game/static/js/2.1e48a972.chunk.js.map",
+    "static/js/3.962c8611.chunk.js": "/react-game/static/js/3.962c8611.chunk.js",
+    "static/js/3.962c8611.chunk.js.map": "/react-game/static/js/3.962c8611.chunk.js.map",
     "index.html": "/react-game/index.html",
-    "static/css/main.5d5e256c.chunk.css.map": "/react-game/static/css/main.5d5e256c.chunk.css.map",
-    "static/js/2.2b74737a.chunk.js.LICENSE.txt": "/react-game/static/js/2.2b74737a.chunk.js.LICENSE.txt",
+    "static/css/main.7c7b8d41.chunk.css.map": "/react-game/static/css/main.7c7b8d41.chunk.css.map",
+    "static/js/2.1e48a972.chunk.js.LICENSE.txt": "/react-game/static/js/2.1e48a972.chunk.js.LICENSE.txt",
     "static/media/Melody 02.76d50769.wav": "/react-game/static/media/Melody 02.76d50769.wav",
     "static/media/alert_error-03.d4fbb6f3.wav": "/react-game/static/media/alert_error-03.d4fbb6f3.wav",
     "static/media/hero_decorative-celebration-01.fd000b5b.wav": "/react-game/static/media/hero_decorative-celebration-01.fd000b5b.wav",
@@ -20,9 +20,9 @@
     "static/media/notification_decorative-01.ffcd70c6.wav": "/react-game/static/media/notification_decorative-01.ffcd70c6.wav"
   },
   "entrypoints": [
-    "static/js/runtime-main.0332359a.js",
-    "static/js/2.2b74737a.chunk.js",
-    "static/css/main.5d5e256c.chunk.css",
-    "static/js/main.3d934eb1.chunk.js"
+    "static/js/runtime-main.a9ff8bd0.js",
+    "static/js/2.1e48a972.chunk.js",
+    "static/css/main.7c7b8d41.chunk.css",
+    "static/js/main.e7489633.chunk.js"
   ]
 }
