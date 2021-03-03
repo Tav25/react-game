@@ -27,6 +27,9 @@ import { Howl, Howler } from 'howler';
 import { VolumeDown } from "@material-ui/icons";
 
 
+import KeyboardEventHandler from 'react-keyboard-event-handler';
+
+
 
 
 class App extends React.Component {
@@ -44,6 +47,7 @@ class App extends React.Component {
       isLoopPlaySound: false,
       soundOn: true,
       isShowMessage: false,
+      numKey: 0,
     };
 
     this.playerMark = 0;
@@ -60,12 +64,41 @@ class App extends React.Component {
   }
 
   ClickGrid = (event) => {
+    this.soundInGame(tapSound);
+    console.log("grid");
+    let data = event.target.getAttribute("data");
+    this.mainGame(data, false)
+
+  }
+
+  ClickNum = (key) => {
+    this.soundInGame(tapSound);
+    this.setState({ numKey: key });
+    let data = this.state.numKey;
+    if( key>=1 ){
+      console.log("adklaskd")
+      const numericalCorrection = {
+        7:0,
+        8:1,
+        9:2,
+        4:3,
+        5:4,
+        6:5,
+        1:6,
+        2:7,
+        3:8
+      }
+      this.mainGame(numericalCorrection[key], true)
+      this.forceUpdate()
+    }
+
+  }
+
+
+  mainGame(data, g) {
+
+
     if (!this.isGameEnd) {
-
-
-      this.soundInGame(tapSound);
-      console.log("grid");
-      let data = event.target.getAttribute("data");
       let squareArray = this.state.squares;
       if (this.state.squares[data] === null) {
         this.strokeCounter += 1
@@ -79,9 +112,9 @@ class App extends React.Component {
 
         squareArray[data] = this.playerMark;
         this.setState({ squares: squareArray });
-        console.log(data, this.state.squares, this.state.playerMarkerDisplay);
+        console.log(data, this.state.squares);
         this.state.playerMarkerDisplay[data] = (
-          <PlayerMarker name={this.state.player} />
+          <PlayerMarker name={this.playerMark} />
         );
 
       } else {
@@ -106,7 +139,11 @@ class App extends React.Component {
       //! test
 
     }
+
+
   };
+
+
 
   isFinishGame(playerMark) {
     console.log("isFinGame" + this.state.squares);
@@ -264,6 +301,13 @@ class App extends React.Component {
     return (
       <div>
         <div>
+        <KeyboardEventHandler handleKeys={['numeric']} onKeyEvent={(key, e) => {
+            console.log(key)
+            this.ClickNum(key)
+          }} />
+        </div>
+        
+        <div>
           <ScoreGames score={this.state.score} />
         </div>
         <div className="gameDesk">
@@ -298,13 +342,15 @@ class App extends React.Component {
             {this.state.playerMarkerDisplay[8]}
           </div>
         </div>
-        
+
         <div><Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={this.state.isShowMessage}
           message="Wrong move. This cell is occupied."
 
-        /></div>
+        />
+          
+        </div>
 
 
         <div className="settings">

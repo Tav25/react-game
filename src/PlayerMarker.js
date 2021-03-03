@@ -4,7 +4,7 @@ import playerMarker1 from './playerMarker1.png';
 import playerMarker2 from './playerMarker2.png';
 
 function PlayerMarker(props) {
-  if (props.name === true) {
+  if (props.name === 1) {
 
     return (
       <div className="PlayerMarker">
